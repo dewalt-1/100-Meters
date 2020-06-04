@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>מאה מטר אחרונים</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <!-- leaflet-Mapbox GL im surprised this actually works -->
+    <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script>
+      var map = L.map("map").setView([31.7678, 35.2171], 18);
+
+      var gl = L.mapboxGL({
+        accessToken:
+          "pk.eyJ1IjoiYmVuMTExMTExMSIsImEiOiJjazhocjVwenMwMnh5M2twYzl6cngwNW92In0.RKO2gVTlIs3FYXmoKrzVYQ",
+
+        style: "mapbox://styles/ben1111111/ck8ue1y0o19tz1iphci1u7cii"
+      }).addTo(map);
+
+      L.Control.geocoder().addTo(map);
+
+      map.on("click", function(e) {
+        //100M
+        var mp = new L.circle([e.latlng.lat, e.latlng.lng], {
+          color: "#AD0D03",
+          fillColor: "#581845",
+          fillOpacity: 0.09,
+          radius: 100,
+          dashArray: 8
+        }).addTo(map);
+      });
+
+      map.on("click", function(e) {
+        //500M
+        var mp = new L.circle([e.latlng.lat, e.latlng.lng], {
+          color: "#005500",
+          fillColor: "#005500",
+          fillOpacity: 0.09,
+          radius: 500,
+          dashArray: 12
+        }).addTo(map);
+      });
+
+      L.control.scale().addTo(map); //scale
+    </script>
+  </body>
+</html>
